@@ -37,10 +37,7 @@ import { ListItemsModule } from './list-items/list-items.module';
         playground: false,
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
         introspection: true, //process.env.STATE !== 'prod',
-        plugins: [
-          ApolloServerPluginLandingPageLocalDefault(),
-          ApolloServerPluginLandingPageProductionDefault(),
-        ],
+        plugins: [ApolloServerPluginLandingPageLocalDefault()],
         context({ req }) {
           //!Bloquear GraphQL para que necesite un usuario Authenticado
           // const token = req.headers.authorization?.replace('Bearer ', '');

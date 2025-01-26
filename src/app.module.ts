@@ -3,7 +3,10 @@ import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'; //was 'apollo-server-core'
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from '@apollo/server/plugin/landingPage/default'; //was 'apollo-server-core'
 import { JwtService } from '@nestjs/jwt';
 import { ItemsModule } from './items/items.module';
 import { ConfigModule } from '@nestjs/config';
@@ -34,7 +37,10 @@ import { ListItemsModule } from './list-items/list-items.module';
         playground: false,
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
         introspection: true, //process.env.STATE !== 'prod',
-        plugins: [ApolloServerPluginLandingPageLocalDefault()],
+        plugins: [
+          ApolloServerPluginLandingPageLocalDefault(),
+          ApolloServerPluginLandingPageProductionDefault(),
+        ],
         context({ req }) {
           //!Bloquear GraphQL para que necesite un usuario Authenticado
           // const token = req.headers.authorization?.replace('Bearer ', '');

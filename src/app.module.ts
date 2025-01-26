@@ -33,6 +33,7 @@ import { ListItemsModule } from './list-items/list-items.module';
       useFactory: async (jwtServyice: JwtService) => ({
         playground: false,
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        introspection: process.env.STATE !== 'prod',
         plugins: [ApolloServerPluginLandingPageLocalDefault()],
         context({ req }) {
           //!Bloquear GraphQL para que necesite un usuario Authenticado
